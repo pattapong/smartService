@@ -1,21 +1,24 @@
-Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smartService", "http://localhost/smartService/smartService.csproj", "{5340FA3D-EC45-4432-844B-2A8E3AA92E62}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smartService", "..\..\..\..\..\inetpub\wwwroot\smartService\smartService.csproj", "{5340FA3D-EC45-4432-844B-2A8E3AA92E62}"
 EndProject
 Global
-	GlobalSection(SolutionConfiguration) = preSolution
-		Debug = Debug
-		Release = Release
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
 	EndGlobalSection
-	GlobalSection(ProjectConfiguration) = postSolution
-		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Debug.ActiveCfg = Debug|.NET
-		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Debug.Build.0 = Debug|.NET
-		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Release.ActiveCfg = Release|.NET
-		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Release.Build.0 = Release|.NET
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Debug|Default.ActiveCfg = Debug|Any CPU
+		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Debug|Default.Build.0 = Debug|Any CPU
+		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Release|Default.ActiveCfg = Release|Any CPU
+		{5340FA3D-EC45-4432-844B-2A8E3AA92E62}.Release|Default.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-	EndGlobalSection
-	GlobalSection(ExtensibilityAddIns) = postSolution
+		SolutionGuid = {9EACB494-2051-4C34-9B8F-04FC4BFBBF75}
 	EndGlobalSection
 EndGlobal
