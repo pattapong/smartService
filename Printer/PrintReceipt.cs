@@ -15,7 +15,7 @@ namespace SmartService.Printer
 		private static bool showGratuity = true;
 		private static bool showMenuKeyID = true;
 
-		public static void Print(int orderBillID)
+		public static void Print(int orderBillID, SmartClient.SmartClient smartClient)
 		{
 			if (orderBillID != 0)
 			{
@@ -85,7 +85,7 @@ namespace SmartService.Printer
 						{
 							str10 = "Tax2";
 						}
-						PrintSlip slip = new PrintSlip("RCP",num);
+						PrintSlip slip = new PrintSlip("RCP", smartClient,num);
 						StringBuilder builder = new StringBuilder();
 						for (int i = 0; i < dataTable.Rows.Count; i++)
 						{

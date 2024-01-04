@@ -18,7 +18,7 @@ namespace SmartService.Printer
 		private static bool showTime = true;
 		private static bool showTotal = true;
 
-		public static void Print(string billDetailID)
+		public static void Print(string billDetailID, SmartClient.SmartClient smartClient)
 		{
 			if (billDetailID != null)
 			{
@@ -33,7 +33,7 @@ namespace SmartService.Printer
 				connection.Close();
 				if (dataTable.Rows.Count != 0)
 				{
-					PrintSlip slip = new PrintSlip("KIT",0);
+					PrintSlip slip = new PrintSlip("KIT", smartClient, 0);
 					StringBuilder builder = new StringBuilder();
 					int num = -1;
 					int num2 = -1;

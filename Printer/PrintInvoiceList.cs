@@ -11,7 +11,7 @@ namespace SmartService.Printer
 	/// </summary>
 	public class PrintInvoiceList
 	{
-		public static void Print(DateTime date, int empType)
+		public static void Print(DateTime date, int empType, SmartClient.SmartClient smartClient)
 		{
 			SqlConnection connection = ConnectDB.GetConnection();
 			SqlCommand selectCommand = new SqlCommand("getRptInvoiceByDate", connection);
@@ -28,7 +28,7 @@ namespace SmartService.Printer
 			else
 			{
 				connection.Close();
-				PrintSlip slip = new PrintSlip("BIL",0);
+				PrintSlip slip = new PrintSlip("BIL", smartClient, 0);
 				StringBuilder builder = new StringBuilder();
 				int num = 0;
 				int num2 = 1;

@@ -10,6 +10,7 @@ using System.Web.Services;
 using SmartService.Printer;
 using SmartService.Utils;
 using SmartService.Report;
+using SmartService.SmartClient;
 
 namespace SmartService
 {
@@ -97,9 +98,10 @@ namespace SmartService
 
 
 		[WebMethod]
-		public void PrintInvoiceReport(DateTime date, int empType)
+		public void PrintInvoiceReport(DateTime date, int empType, int clientID)
 		{
-			PrintInvoiceList.Print(date, empType);
+            SmartClient.SmartClient smartClient = BusinessService.GetSmartClientByID(clientID);
+			PrintInvoiceList.Print(date, empType, smartClient);
 		}
 
 
@@ -146,20 +148,23 @@ namespace SmartService
 		}
 
 		[WebMethod]
-		public void PrintSummaryMenuType(DateTime date)
+		public void PrintSummaryMenuType(DateTime date, int clientID)
 		{
-			Printer.PrintSummary.PrintMenuType(date);
+            SmartClient.SmartClient smartClient = GetSmartClientByID(clientID);
+			Printer.PrintSummary.PrintMenuType(date, smartClient);
 		}
 
 		[WebMethod]
-		public void PrintSummaryReceive(DateTime date)
+		public void PrintSummaryReceive(DateTime date, int clientID)
 		{
-			Printer.PrintSummary.PrintReceive(date);
+            SmartClient.SmartClient smartClient = GetSmartClientByID(clientID);
+            Printer.PrintSummary.PrintReceive(date, smartClient);
 		}
 		[WebMethod]
-		public void PrintTaxSummary(int month, int year)
+		public void PrintTaxSummary(int month, int year, int clientID)
 		{
-			Printer.PrintTaxSummary.Print(month, year);
+            SmartClient.SmartClient smartClient = GetSmartClientByID(clientID);
+            Printer.PrintTaxSummary.Print(month, year, smartClient);
 		}
 		[WebMethod]
 		public void SetBillPrinter(string printerName)
@@ -227,5 +232,25 @@ namespace SmartService
 			return PrintSlip.GetInstalledPrinter();
 		}
 
-	}
+        [WebMethod]
+        public SmartClient.SmartClient GetSmartClient(int clientID)
+        {
+            return GetSmartClientByID(clientID);
+        }
+
+        public static SmartClient.SmartClient GetSmartClientByID(int clientID)
+        {
+            SmartService.SmartClient.SmartClient client = new SmartService.SmartClient.SmartClient();
+            SqlConnection connection = ConnectDB.GetConnection();
+            SqlCommand command = new SqlCommand("getSmartclient", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("@id", SqlDbType.NVarChar).Value = clientID;
+            DataTable dataTable = new DataTable();
+            new SqlDataAdapter(command).Fill(dataTable);
+            connection.Close();
+            client.ID = (int)dataTable.Rows[0]["id"];
+            client.LocalPrinter = (string)dataTable.Rows[0]["local_printer"];
+            return client;
+        }
+    }
 }

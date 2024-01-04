@@ -16,7 +16,7 @@ namespace SmartService.Utils
 			return ((str != null) && (str == "1"));
 		}
 
-		public static float GetPaperWidth()
+        public static float GetPaperWidth()
 		{
 			try
 			{

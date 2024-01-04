@@ -13,7 +13,7 @@ namespace SmartService.Printer
 	public class PrintTaxSummary
 	{
 		private static CultureInfo ci = new CultureInfo("en-US");
-		public static void Print(int month, int year)
+		public static void Print(int month, int year, SmartClient.SmartClient smartClient)
 		{
 			SqlConnection connection = ConnectDB.GetConnection();
 			SqlCommand selectCommand = new SqlCommand("getTaxSummary", connection);
@@ -34,7 +34,7 @@ namespace SmartService.Printer
 				connection.Close();
 				string descriptionByID = CheckBillService.GetDescriptionByID("TAX1");
 				string str2 = CheckBillService.GetDescriptionByID("TAX2");
-				PrintSlip slip = new PrintSlip("BIL",0);
+				PrintSlip slip = new PrintSlip("BIL", smartClient, 0);
 				StringBuilder builder = new StringBuilder();
 				slip.Add("Tax Monthly Report", 0, 1);
 				slip.Add(new DateTime(year, month, 1).ToString("MMMM yyyy", ci), 1, 1);

@@ -22,12 +22,12 @@ namespace SmartService.Printer
 			//
 		}
 
-		public static void Print(int orderBillID)
+		public static void Print(int orderBillID, SmartClient.SmartClient smartClient)
 		{
-			Print(orderBillID, false);
+			Print(orderBillID, smartClient, false);
 		}
 
-		public static void Print(int orderBillID, bool reprint)
+		public static void Print(int orderBillID, SmartClient.SmartClient smartClient, bool reprint)
 		{
 			if (orderBillID != 0)
 			{
@@ -101,7 +101,7 @@ namespace SmartService.Printer
 							{
 								str10 = "Tax2";
 							}
-							PrintSlip slip = new PrintSlip("BIL",num);
+							PrintSlip slip = new PrintSlip("BIL", smartClient, num);
 							StringBuilder builder = new StringBuilder();
 							for (int i = 0; i < dataTable.Rows.Count; i++)
 							{

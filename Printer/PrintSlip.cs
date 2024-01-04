@@ -149,13 +149,17 @@ namespace SmartService.Printer
 			this.fontSize = size;
 			this.textAlignment = alignment;
 		}
-		public PrintSlip(string style,int table_id)
+		public PrintSlip(string style, SmartClient.SmartClient smartClient,int table_id)
 		{
 			this.LoadConfig(style,table_id);
 			this.printDoc = new PrintDocument();
 			try
 			{
-				if ((this.printerName != null) && (this.printerName != ""))
+                if (this.printerName == "local_printer")
+                {
+                    this.printerName = smartClient.LocalPrinter;
+                }
+                else if ((this.printerName != null) && (this.printerName != ""))
 				{
 					this.printDoc.PrinterSettings.PrinterName = this.printerName;
 				}

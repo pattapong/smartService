@@ -448,15 +448,16 @@ namespace SmartService
 		}
 
 		[WebMethod]
-		public string SendOrder(OrderInformation orderInfo, int CustID, string CustFullName)
+		public string SendOrder(OrderInformation orderInfo, int CustID, string CustFullName, int clientID)
 		{
-			return this.SendOrderPrint(orderInfo, CustID, CustFullName, true);
+			return this.SendOrderPrint(orderInfo, CustID, CustFullName, true, clientID);
 		}
 
 		[WebMethod]
-		public string SendOrderPrint(OrderInformation orderInfo, int CustID, string CustFullName, bool print)
+		public string SendOrderPrint(OrderInformation orderInfo, int CustID, string CustFullName, bool print, int clientID)
 		{
-			int num = 0;
+            SmartClient.SmartClient smartClient = BusinessService.GetSmartClientByID(clientID);
+            int num = 0;
 			ArrayList list = new ArrayList();
 			ArrayList list2 = new ArrayList();
 			string[] billDetailID = null;
@@ -750,7 +751,7 @@ namespace SmartService
 				if (print)
 				{
 					billDetailID = (string[]) list.ToArray(typeof(string));
-					this.PrintKitchen(billDetailID);
+					this.PrintKitchen(billDetailID, clientID);
 					for (int m = 0; m < list2.Count; m++)
 					{
 						OrderInformation.OrderPrintKitchen((int) list2[m]);
@@ -1021,37 +1022,41 @@ namespace SmartService
 		}
 
 
-		[WebMethod]
-		public int PrintReceipt(int OrderBillID)
+        [WebMethod]
+        public int PrintReceipt(int OrderBillID, int ClientID)
 		{
-			Printer.PrintReceipt.Print(OrderBillID);
+            SmartClient.SmartClient smartClient = BusinessService.GetSmartClientByID(ClientID);
+            Printer.PrintReceipt.Print(OrderBillID, smartClient);
 			OrderBill bill = new OrderBill();
 			return bill.OrderBillPrint(OrderBillID);
 		}
 
 
 		[WebMethod]
-		public int PrintBill(int OrderBillID)
+		public int PrintBill(int OrderBillID, int ClientID)
 		{
-			Printer.PrintBill.Print(OrderBillID);
+            SmartClient.SmartClient smartClient = BusinessService.GetSmartClientByID(ClientID);
+			Printer.PrintBill.Print(OrderBillID, smartClient);
 			OrderBill bill = new OrderBill();
 			return bill.OrderBillPrint(OrderBillID);
 		}
 
 
 		[WebMethod]
-		public int ReprintBill(int OrderBillID)
+		public int ReprintBill(int OrderBillID, int ClientID)
 		{
-			Printer.PrintBill.Print(OrderBillID, true);
+            SmartClient.SmartClient smartClient = BusinessService.GetSmartClientByID(ClientID);
+            Printer.PrintBill.Print(OrderBillID, smartClient, true);
 			OrderBill bill = new OrderBill();
 			return bill.OrderBillPrint(OrderBillID);
 		}
 
 
-		private int PrintKitchen(string[] BillDetailID)
+		private int PrintKitchen(string[] BillDetailID, int clientID)
 		{
-			string billDetailID = string.Join(",", BillDetailID);
-			Printer.PrintKitchen.Print(billDetailID);
+            SmartClient.SmartClient smartClient = BusinessService.GetSmartClientByID(clientID);
+            string billDetailID = string.Join(",", BillDetailID);
+			Printer.PrintKitchen.Print(billDetailID, smartClient);
 			byte status = 2;
 			OrderBillItem item = new OrderBillItem();
 			return item.OrderBillItemStatus(billDetailID, status);
