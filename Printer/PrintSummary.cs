@@ -14,17 +14,17 @@ namespace SmartService.Printer
 		private const int BY_MENUTYPE	= 1;
 		private const int BY_RECEIVE	= 2;
 
-		public static void PrintMenuType(DateTime date)
+		public static void PrintMenuType(DateTime date, SmartClient.SmartClient smartClient)
 		{
-			Print(1, date);
+			Print(1, date, smartClient);
 		}
 
-		public static void PrintReceive(DateTime date)
+		public static void PrintReceive(DateTime date, SmartClient.SmartClient smartClient)
 		{
-			Print(2, date);
+			Print(2, date, smartClient);
 		}
 
-		private static void Print(int type, DateTime date)
+		private static void Print(int type, DateTime date, SmartClient.SmartClient smartClient)
 		{
 			SqlConnection connection = ConnectDB.GetConnection();
 			SqlCommand selectCommand = new SqlCommand();
@@ -50,7 +50,7 @@ namespace SmartService.Printer
 			connection.Close();
 			if (dataTable.Rows.Count != 0)
 			{
-				PrintSlip slip = new PrintSlip("RCP",0);
+				PrintSlip slip = new PrintSlip("RCP", smartClient, 0);
 				StringBuilder builder = new StringBuilder();
 				for (int i = 0; i < dataTable.Rows.Count; i++)
 				{

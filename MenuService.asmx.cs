@@ -66,7 +66,7 @@ namespace SmartService
 			{
 				str3 = "MenuName" + str;
 			}
-			new PrintSlip("KIT",0);
+			//new PrintSlip("KIT",0);
 			SqlConnection connection = null;
 			try
 			{
