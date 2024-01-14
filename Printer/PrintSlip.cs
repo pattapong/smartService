@@ -155,7 +155,7 @@ namespace SmartService.Printer
 			this.printDoc = new PrintDocument();
 			try
 			{
-                if (this.printerName == "local_printer")
+                if (this.printerName == "localprinter")
                 {
                     this.printerName = smartClient.LocalPrinter;
                 }

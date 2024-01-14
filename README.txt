@@ -43,7 +43,7 @@ GO
 
 CREATE TABLE [dbo].[smartclient_mst](
 	[id] [int] NOT NULL,
-	[local_printer] [varchar](max) NULL
+	[localprinter] [varchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
@@ -92,7 +92,7 @@ Add new records to smartclient_mst
 1, print_b
 =================================================
 
-create a local printer on the server called "local_printer"
+create a local printer on the server called "localprinter"
 
 Turn on share printer to the network on the second location
 
@@ -101,4 +101,5 @@ At the server, add a new network printer to point to the second printer in the b
 Update App.config for both at both location. Ensure the file contains
 <add key="client_id" value="<client ID>">
 Client ID has to match the smartclient_mst table
+
 

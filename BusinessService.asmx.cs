@@ -249,7 +249,7 @@ namespace SmartService
             new SqlDataAdapter(command).Fill(dataTable);
             connection.Close();
             client.ID = (int)dataTable.Rows[0]["id"];
-            client.LocalPrinter = (string)dataTable.Rows[0]["local_printer"];
+            client.LocalPrinter = (string)dataTable.Rows[0]["localprinter"];
             return client;
         }
     }
